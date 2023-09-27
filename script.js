@@ -33,11 +33,11 @@ function randomNumber(size) {
 
 function generatePassword() {
   //declares local variables 
-  var passLength;
-  var count = 0;
-  var pass = [];
-  var includedArray = [];
-  var includeLower, includeUpper, includeNum, includeSpec;
+  var passLength; //holds password length
+  var count = 0; //starts our count in the for loop
+  var pass = []; //makes an empty array to hold our password
+  var includedArray = []; //makes an empty array to hold our included characters
+  var includeLower, includeUpper, includeNum, includeSpec; //declares vars to hold boolean values 
 
   //Asks user for password length and checks if it's between 8 and 128 
   passLength =  prompt("How long do you want your password to be? \n (must be bewteen 8 and 128 characters in length)");
@@ -50,10 +50,13 @@ function generatePassword() {
     return;
   }
   
+  console.log(passLength); //verifies given passLength
+
+  //Asks user if we should include lowercase letters
   includeLower = confirm("Do you want to include lowercase letters?\n (Okay for yes, Cancel for no)");
   if(includeLower) {
     includedArray = includedArray.concat(lowerArray);
-    pass.splice(randomNumber(size), 0, lowerArray[randomNumber(lowerArray.length)]);
+    pass.splice(randomNumber(passLength), 0, lowerArray[randomNumber(lowerArray.length)]);
     count++;
     alert("You have chosen to include lowercase letters");
   }
@@ -61,10 +64,11 @@ function generatePassword() {
     alert("You have chosen to exclude lowercase letters");
   }
   
+  //Asks user if we should include uppercase letters
   includeUpper = confirm("Do you want to include uppercase letters?\n (Okay for yes, Cancel for no)");
   if(includeUpper) {
     includedArray = includedArray.concat(upperArray);
-    pass.splice(randomNumber(size), 0, upperArray[randomNumber(upperArray.length)]);
+    pass.splice(randomNumber(passLength), 0, upperArray[randomNumber(upperArray.length)]);
     count++;
     alert("You have chosen to include uppercase letters");
   }
@@ -72,10 +76,11 @@ function generatePassword() {
     alert("You have chosen to exclude uppercase letters");
   }
 
+  //Asks user if we should include numeric letters
   includeNum = confirm("Do you want to include numeric characters?\n (Okay for yes, Cancel for no)");
   if(includeNum) {
     includedArray = includedArray.concat(numArray);
-    pass.splice(randomNumber(size), 0, numArray[randomNumber(numArray.length)]);
+    pass.splice(randomNumber(passLength), 0, numArray[randomNumber(numArray.length)]);
     count++;
     alert("You have chosen to include numeric characters");
   }
@@ -83,10 +88,11 @@ function generatePassword() {
     alert("You have chosen to exclude numeric characters");
   }
 
+  //Asks user if we should include special letters
   includeSpec = confirm("Do you want to include special characters?\n (Okay for yes, Cancel for no)");  
   if(includeSpec) {
     includedArray = includedArray.concat(specArray);
-    pass.splice(randomNumber(size), 0, specArray[randomNumber(specArray.length)]);
+    pass.splice(randomNumber(passLength), 0, specArray[randomNumber(specArray.length)]);
     count++;
     alert("You have chosen to include special characters");
   }
@@ -94,10 +100,12 @@ function generatePassword() {
     alert("You have chosen to exclude special characters");
   }
 
+  //loops to add the remaining number of characters using our includedArray
+  //will only loop from wherever we started our count based on what was included
   for(; count < passLength; count++) {
-    pass.splice(randomNumber(size), 0, includedArray[randomNumber(includedArray.length)]);
+    pass.splice(randomNumber(passLength), 0, includedArray[randomNumber(includedArray.length)]);
   }
-
+  console.log(pass.length); //outputs current pass.length for checks
   pass = pass.join("");
   return pass;
 }
