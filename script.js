@@ -15,14 +15,26 @@ var upperArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 var numArray = "1234567890".split("");
 var specArray = ' !"#$%&' + "'()*+,-./:;<=>?@[\\]^_`{|}~"; //special characters make strings "fun" >.<
 specArray = specArray.split("");
+function randomNumber(size) {
+  return Math.floor(Math.random() * size);
+}
 
+
+// var temp = [];
 // for(x = 0; x < specArray.length; x++){
 //   console.log(specArray[x]);
 // }
 //leaving here for testing
+// temp.splice(1, 0, "test");
+// temp.splice(4, 0, "test2");
+// temp.splice(0, 0, "test4")
+// temp.splice(4, 0, "test3");
+// console.log(temp)
 
 function generatePassword(){
   var passLength;
+  var count = 0;
+  var pass = [];
   var includedArray = [];
   var includeLower, includeUpper, includeNum, includeSpec;
 
@@ -41,17 +53,27 @@ function generatePassword(){
   includeSpec = confirm("Do you want to include special characters?\n (Okay for yes, Cancel for no)");
   if(includeLower) {
     includedArray = includedArray.concat(lowerArray);
+    pass.splice(randomNumber(size), 0, randomNumber(lowerArray.length));
+    count++;
   }
   if(includeUpper) {
     includedArray = includedArray.concat(upperArray);
+    pass.splice(randomNumber(size), 0, randomNumber(upperArray.length));
+    count++;
   }
   if(includeNum) {
     includedArray = includedArray.concat(numArray);
+    pass.splice(randomNumber(size), 0, randomNumber(numArray.length));
+    count++;
   }
   if(includeSpec) {
     includedArray = includedArray.concat(specArray);
+    pass.splice(randomNumber(size), 0, randomNumber(specArray.length));
+    count++;
   }
 
+
+  return pass;
 }
 
 //each characteristic exists in an array containing only those characters
