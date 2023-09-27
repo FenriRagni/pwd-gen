@@ -4,7 +4,7 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  console.log(passwordText);
+  // console.log(passwordText);
   passwordText.value = password;
 }
 //sets our characteristic arrays using split()
@@ -16,6 +16,8 @@ var numArray = "1234567890".split("");
 var specArray = ' !"#$%&' + "'()*+,-./:;<=>?@[\\]^_`{|}~"; //special characters make strings "fun" >.<
 specArray = specArray.split("");
 
+//uses the Math random gives us a value between 0 and 1
+// which we multiply by a given number and then truncate in order to get a random integer 
 function randomNumber(size) {
   return Math.floor(Math.random() * size);
 }
@@ -41,16 +43,18 @@ function generatePassword() {
 
   //Asks user for password length and checks if it's between 8 and 128 
   passLength =  prompt("How long do you want your password to be? \n (Password must be bewteen 8 and 128 characters in length)");
-  if(passLength < 8) {
+  console.log("Chosen password length " + passLength); //verifies given passLength
+  if(passLength === null) {
+    return "You've chosen no password length";
+  }
+  else if(passLength < 8) {
     //alert("Password length cannot be shorter than 8 characters");
     return "Password length cannot be shorter than 8 characters";
   }
   else if(passLength > 128) {
     //alert("Password Length cannot be longer than 128 characters");
-    return "Password Length cannot be longer than 128 characters";
+    return "Password length cannot be longer than 128 characters";
   }
-  
-  console.log(passLength); //verifies given passLength
 
   //Asks user if we should include lowercase letters
   includeLower = confirm("Do you want to include lowercase letters?\n (Okay for yes, Cancel for no)");
@@ -98,7 +102,7 @@ function generatePassword() {
     pass.splice(randomNumber(passLength), 0, specArray[randomNumber(specArray.length)]);
     count++;
     alert("You have chosen to include special characters");
-    console.log("includes includes special");
+    console.log("includes special");
   }
   else {
     alert("You have chosen to exclude special characters");
@@ -113,7 +117,7 @@ function generatePassword() {
   for(; count < passLength; count++) {
     pass.splice(randomNumber(passLength), 0, includedArray[randomNumber(includedArray.length)]);
   }
-  console.log(pass.length); //outputs current pass.length for checks
+  console.log("Password length: " + pass.length); //outputs current pass.length for checks
   pass = pass.join("");
   return pass;
 }
