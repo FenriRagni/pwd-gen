@@ -8,19 +8,23 @@ function writePassword() {
   passwordText.value = password;
 }
 
+// .split() turns a string into an array with each character when the parameter input is "" 
+// since there is no deleation to split upon
 var lowerArray = "abcdefghijklmnopqrstuvwxyz".split("");
 var upperArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 var numArray = "1234567890".split("");
-var specArray = ' !"#$%&'+ "'()*+,-./:;<=>?@[\\]^_`{|}~";
+var specArray = ' !"#$%&' + "'()*+,-./:;<=>?@[\\]^_`{|}~"; //special characters make strings "fun" >.<
 specArray = specArray.split("");
 
 // for(x = 0; x < specArray.length; x++){
 //   console.log(specArray[x]);
 // }
+//leaving here for testing
 
 function generatePassword(){
   var passLength;
-  var includedArray;
+  var includedArray = [];
+  var includeLower, includeUpper, includeNum, includeSpec;
 
   passLength =  prompt("How long do you want your password to be? \n (must be bewteen 8 and 128 characters in length)");
   if(passLength < 8) {
@@ -31,9 +35,23 @@ function generatePassword(){
     alert("Password Length cannot be longer than 128 characters!");
     return;
   }
-  else {
-
+  includeLower = confirm("Do you want to include lowercase letters?\n (Okay for yes, Cancel for no)");
+  includeUpper = confirm("Do you want to include uppercase letters?\n (Okay for yes, Cancel for no)");
+  includeNum = confirm("Do you want to include numeric characters?\n (Okay for yes, Cancel for no)");
+  includeSpec = confirm("Do you want to include special characters?\n (Okay for yes, Cancel for no)");
+  if(includeLower) {
+    includedArray = includedArray.concat(lowerArray);
   }
+  if(includeUpper) {
+    includedArray = includedArray.concat(upperArray);
+  }
+  if(includeNum) {
+    includedArray = includedArray.concat(numArray);
+  }
+  if(includeSpec) {
+    includedArray = includedArray.concat(specArray);
+  }
+
 }
 
 //each characteristic exists in an array containing only those characters
