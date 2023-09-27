@@ -31,13 +31,15 @@ function randomNumber(size) {
 // temp.splice(4, 0, "test3");
 // console.log(temp)
 
-function generatePassword(){
+function generatePassword() {
+  //declares local variables 
   var passLength;
   var count = 0;
   var pass = [];
   var includedArray = [];
   var includeLower, includeUpper, includeNum, includeSpec;
 
+  //Asks user for password length and checks if it's between 8 and 128 
   passLength =  prompt("How long do you want your password to be? \n (must be bewteen 8 and 128 characters in length)");
   if(passLength < 8) {
     alert("Password length cannot be shorter than 8 characters");
@@ -47,32 +49,56 @@ function generatePassword(){
     alert("Password Length cannot be longer than 128 characters!");
     return;
   }
+  
   includeLower = confirm("Do you want to include lowercase letters?\n (Okay for yes, Cancel for no)");
-  includeUpper = confirm("Do you want to include uppercase letters?\n (Okay for yes, Cancel for no)");
-  includeNum = confirm("Do you want to include numeric characters?\n (Okay for yes, Cancel for no)");
-  includeSpec = confirm("Do you want to include special characters?\n (Okay for yes, Cancel for no)");
   if(includeLower) {
     includedArray = includedArray.concat(lowerArray);
-    pass.splice(randomNumber(size), 0, randomNumber(lowerArray.length));
+    pass.splice(randomNumber(size), 0, lowerArray[randomNumber(lowerArray.length)]);
     count++;
+    alert("You have chosen to include lowercase letters");
   }
+  else {
+    alert("You have chosen to exclude lowercase letters");
+  }
+  
+  includeUpper = confirm("Do you want to include uppercase letters?\n (Okay for yes, Cancel for no)");
   if(includeUpper) {
     includedArray = includedArray.concat(upperArray);
-    pass.splice(randomNumber(size), 0, randomNumber(upperArray.length));
+    pass.splice(randomNumber(size), 0, upperArray[randomNumber(upperArray.length)]);
     count++;
+    alert("You have chosen to include uppercase letters");
   }
+  else {
+    alert("You have chosen to exclude uppercase letters");
+  }
+
+  includeNum = confirm("Do you want to include numeric characters?\n (Okay for yes, Cancel for no)");
   if(includeNum) {
     includedArray = includedArray.concat(numArray);
-    pass.splice(randomNumber(size), 0, randomNumber(numArray.length));
+    pass.splice(randomNumber(size), 0, numArray[randomNumber(numArray.length)]);
     count++;
+    alert("You have chosen to include numeric characters");
   }
+  else {
+    alert("You have chosen to exclude numeric characters");
+  }
+
+  includeSpec = confirm("Do you want to include special characters?\n (Okay for yes, Cancel for no)");  
   if(includeSpec) {
     includedArray = includedArray.concat(specArray);
-    pass.splice(randomNumber(size), 0, randomNumber(specArray.length));
+    pass.splice(randomNumber(size), 0, specArray[randomNumber(specArray.length)]);
     count++;
+    alert("You have chosen to include special characters");
+  }
+  else {
+    alert("You have chosen to exclude special characters");
   }
 
+  for(; count < passLength; count++) {
+    pass.splice(randomNumber(size), 0, includedArray[randomNumber(includedArray.length)]);
+  }
 
+  pass = pass.join("");
   return pass;
 }
 
