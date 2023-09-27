@@ -8,12 +8,19 @@ function writePassword() {
   passwordText.value = password;
 }
 
+var lowerArray = "abcdefghijklmnopqrstuvwxyz".split("");
+var upperArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+var numArray = "1234567890".split("");
+var specArray = ' !"#$%&'+ "'()*+,-./:;<=>?@[\\]^_`{|}~";
+specArray = specArray.split("");
+
+// for(x = 0; x < specArray.length; x++){
+//   console.log(specArray[x]);
+// }
+
 function generatePassword(){
   var passLength;
-  var includeLower;
-  var includeUpper;
-  var includeNum;
-  var includeSpec;
+  var includedArray;
 
   passLength =  prompt("How long do you want your password to be? \n (must be bewteen 8 and 128 characters in length)");
   if(passLength < 8) {
@@ -40,7 +47,7 @@ function generatePassword(){
 //if no characteristics are selected alert user and exit generatePassword()
 //for each chosen characteristic choose one at random from characteristic array to add to password
 //once one of each characteristic has been chosen we choose randomly from the includedArray until we reach the password length
-//we then output the password to the main screen
+//
 
 
 
