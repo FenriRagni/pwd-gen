@@ -7,7 +7,7 @@ function writePassword() {
   console.log(passwordText);
   passwordText.value = password;
 }
-
+//sets our characteristic arrays using split()
 // .split() turns a string into an array with each character when the parameter input is "" 
 // since there is no deleation to split upon
 var lowerArray = "abcdefghijklmnopqrstuvwxyz".split("");
@@ -15,10 +15,10 @@ var upperArray = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 var numArray = "1234567890".split("");
 var specArray = ' !"#$%&' + "'()*+,-./:;<=>?@[\\]^_`{|}~"; //special characters make strings "fun" >.<
 specArray = specArray.split("");
+
 function randomNumber(size) {
   return Math.floor(Math.random() * size);
 }
-
 
 // var temp = [];
 // for(x = 0; x < specArray.length; x++){
@@ -40,14 +40,14 @@ function generatePassword() {
   var includeLower, includeUpper, includeNum, includeSpec; //declares vars to hold boolean values 
 
   //Asks user for password length and checks if it's between 8 and 128 
-  passLength =  prompt("How long do you want your password to be? \n (must be bewteen 8 and 128 characters in length)");
+  passLength =  prompt("How long do you want your password to be? \n (Password must be bewteen 8 and 128 characters in length)");
   if(passLength < 8) {
-    alert("Password length cannot be shorter than 8 characters");
-    return;
+    //alert("Password length cannot be shorter than 8 characters");
+    return "Password length cannot be shorter than 8 characters";
   }
   else if(passLength > 128) {
-    alert("Password Length cannot be longer than 128 characters!");
-    return;
+    //alert("Password Length cannot be longer than 128 characters");
+    return "Password Length cannot be longer than 128 characters";
   }
   
   console.log(passLength); //verifies given passLength
@@ -59,6 +59,7 @@ function generatePassword() {
     pass.splice(randomNumber(passLength), 0, lowerArray[randomNumber(lowerArray.length)]);
     count++;
     alert("You have chosen to include lowercase letters");
+    console.log("includes lowercase");
   }
   else {
     alert("You have chosen to exclude lowercase letters");
@@ -71,6 +72,7 @@ function generatePassword() {
     pass.splice(randomNumber(passLength), 0, upperArray[randomNumber(upperArray.length)]);
     count++;
     alert("You have chosen to include uppercase letters");
+    console.log("includes uppercase");
   }
   else {
     alert("You have chosen to exclude uppercase letters");
@@ -83,6 +85,7 @@ function generatePassword() {
     pass.splice(randomNumber(passLength), 0, numArray[randomNumber(numArray.length)]);
     count++;
     alert("You have chosen to include numeric characters");
+    console.log("includes numbers");
   }
   else {
     alert("You have chosen to exclude numeric characters");
@@ -95,9 +98,14 @@ function generatePassword() {
     pass.splice(randomNumber(passLength), 0, specArray[randomNumber(specArray.length)]);
     count++;
     alert("You have chosen to include special characters");
+    console.log("includes includes special");
   }
   else {
     alert("You have chosen to exclude special characters");
+  }
+
+  if(!includeLower && !includeUpper && !includeNum && !includeSpec) {
+    return "You've chosen no characteristics for the password";
   }
 
   //loops to add the remaining number of characters using our includedArray
