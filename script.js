@@ -16,12 +16,26 @@ var numArray = "1234567890".split("");
 var specArray = ' !"#$%&' + "'()*+,-./:;<=>?@[\\]^_`{|}~"; //special characters make strings "fun" >.<
 specArray = specArray.split("");
 
-//uses the Math random gives us a value between 0 and 1
-// which we multiply by a given number and then truncate in order to get a random integer 
+// Math random gives us a value between 0 and 1
+// which we multiply by a given number and then truncate in order to get a random integer
+// that is between 0 and the given number
 function randomNumber(size) {
   return Math.floor(Math.random() * size);
 }
 
+//uses a for loop to move through the array then swapping each element in the array with a random one elsewhere
+//uses an array of declarations to change the given elements with each other by changing their values at the same time
+function shuffle(array1) {
+  console.log(array1);
+  console.log(array1.length);
+  for(var element1 = 0; element1 < array1.length; element1++) {
+    var element2 = randomNumber(array1.length);
+    [array1[element1],array1[element2]] = [array1[element2], array1[element1]];
+  }
+  console.log(array1);
+  console.log(array1.length);
+  return array1;
+}
 // var temp = [];
 // for(x = 0; x < specArray.length; x++){
 //   console.log(specArray[x]);
@@ -112,8 +126,11 @@ function generatePassword() {
     return "You've chosen no characteristics for the password";
   }
 
-  //loops to add the remaining number of characters using our includedArray
-  //will only loop from wherever we started our count based on what was included
+  //shuffles the array to increase randomness so that a clump of numbers doesn't mean a clump of like characters
+  includedArray = shuffle(includedArray);
+
+  //loops to add the remaining number of characters randomly into our password
+  //will only loop from wherever we started our count based on what was included/
   for(; count < passLength; count++) {
     pass.splice(randomNumber(passLength), 0, includedArray[randomNumber(includedArray.length)]);
   }
@@ -134,8 +151,6 @@ function generatePassword() {
 //for each chosen characteristic choose one at random from characteristic array to add to password
 //once one of each characteristic has been chosen we choose randomly from the includedArray until we reach the password length
 //
-
-
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);

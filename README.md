@@ -19,3 +19,5 @@ After getting a password length, the app asks the user to confirm which characte
 ![demo-characteristics](./images/characteristics.gif)
 
 ## Credits
+
+Thanks to [freeCodeCamp](https://www.freecodecamp.org/news/swap-two-array-elements-in-javascript/) to helping me understand how to swap two elements in an array and teaching me that you can make an array of declarations in order to change multiple things at the same time;
