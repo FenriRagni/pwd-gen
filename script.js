@@ -4,7 +4,6 @@ var generateBtn = document.querySelector("#generate");
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
-  // console.log(passwordText);
   passwordText.value = password;
 }
 //sets our characteristic arrays using split()
@@ -26,47 +25,31 @@ function randomNumber(size) {
 //uses a for loop to move through the array then swapping each element in the array with a random one elsewhere
 //uses an array of declarations to change the given elements with each other by changing their values at the same time
 function shuffle(array1) {
-  console.log(array1);
-  console.log(array1.length);
+  var element2;
   for(var element1 = 0; element1 < array1.length; element1++) {
-    var element2 = randomNumber(array1.length);
+    element2 = randomNumber(array1.length);
     [array1[element1],array1[element2]] = [array1[element2], array1[element1]];
   }
-  console.log(array1);
-  console.log(array1.length);
   return array1;
 }
-// var temp = [];
-// for(x = 0; x < specArray.length; x++){
-//   console.log(specArray[x]);
-// }
-//leaving here for testing
-// temp.splice(1, 0, "test");
-// temp.splice(4, 0, "test2");
-// temp.splice(0, 0, "test4")
-// temp.splice(4, 0, "test3");
-// console.log(temp)
 
 function generatePassword() {
   //declares local variables 
-  var passLength; //holds password length
+  var passLength; 
   var count = 0; //starts our count in the for loop
-  var pass = []; //makes an empty array to hold our password
-  var includedArray = []; //makes an empty array to hold our included characters
-  var includeLower, includeUpper, includeNum, includeSpec; //declares vars to hold boolean values 
+  var pass = []; 
+  var includedArray = []; 
+  var includeLower, includeUpper, includeNum, includeSpec; 
 
   //Asks user for password length and checks if it's between 8 and 128 
   passLength =  prompt("How long do you want your password to be? \n (Password must be bewteen 8 and 128 characters in length)");
-  console.log("Chosen password length " + passLength); //verifies given passLength
   if(passLength === null) {
     return "You've chosen no password length";
   }
   else if(passLength < 8) {
-    //alert("Password length cannot be shorter than 8 characters");
     return "Password length cannot be shorter than 8 characters";
   }
   else if(passLength > 128) {
-    //alert("Password Length cannot be longer than 128 characters");
     return "Password length cannot be longer than 128 characters";
   }
 
@@ -77,7 +60,6 @@ function generatePassword() {
     pass.splice(randomNumber(passLength), 0, lowerArray[randomNumber(lowerArray.length)]);
     count++;
     alert("You have chosen to include lowercase letters");
-    console.log("includes lowercase");
   }
   else {
     alert("You have chosen to exclude lowercase letters");
@@ -90,7 +72,6 @@ function generatePassword() {
     pass.splice(randomNumber(passLength), 0, upperArray[randomNumber(upperArray.length)]);
     count++;
     alert("You have chosen to include uppercase letters");
-    console.log("includes uppercase");
   }
   else {
     alert("You have chosen to exclude uppercase letters");
@@ -103,7 +84,6 @@ function generatePassword() {
     pass.splice(randomNumber(passLength), 0, numArray[randomNumber(numArray.length)]);
     count++;
     alert("You have chosen to include numeric characters");
-    console.log("includes numbers");
   }
   else {
     alert("You have chosen to exclude numeric characters");
@@ -116,7 +96,6 @@ function generatePassword() {
     pass.splice(randomNumber(passLength), 0, specArray[randomNumber(specArray.length)]);
     count++;
     alert("You have chosen to include special characters");
-    console.log("includes special");
   }
   else {
     alert("You have chosen to exclude special characters");
@@ -134,10 +113,13 @@ function generatePassword() {
   for(; count < passLength; count++) {
     pass.splice(randomNumber(passLength), 0, includedArray[randomNumber(includedArray.length)]);
   }
-  console.log("Password length: " + pass.length); //outputs current pass.length for checks
+  pass = shuffle(pass);
   pass = pass.join("");
   return pass;
 }
+
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
 
 //each characteristic exists in an array containing only those characters
 //generatePassword() should prompt for the length of the password
@@ -150,7 +132,3 @@ function generatePassword() {
 //if no characteristics are selected alert user and exit generatePassword()
 //for each chosen characteristic choose one at random from characteristic array to add to password
 //once one of each characteristic has been chosen we choose randomly from the includedArray until we reach the password length
-//
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
